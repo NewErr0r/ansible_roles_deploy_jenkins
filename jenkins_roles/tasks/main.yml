@@ -1,0 +1,5 @@
+---
+- name: Install Jenkins on CentOS
+  include_tasks: centos_jenkins.yaml
+  when: 
+    - ansible_os_family == "RedHat"

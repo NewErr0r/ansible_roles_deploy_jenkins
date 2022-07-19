@@ -1,0 +1,37 @@
+---
+- name: Install java
+  dnf:
+    name: java-11-openjdk-devel
+    state: latest
+
+- name: Add Jenkins Key
+  rpm_key:
+    key: "{{ rpm_key }}"
+    state: present
+
+- name: Add Jenkins repo
+  get_url:
+    url: "{{ repo }}"
+    dest: "{{ path_repo }}"
+
+- name: Install Jenkins
+  dnf: 
+    name: jenkins 
+    state: latest
+  notify:
+    - Started and Enabled Jenkins
+
+- name: Configure Firewalld
+  firewalld:
+    port: "8080/tcp"
+    state: enabled 
+    permanent: yes
+  notify: 
+    - Restart Firewalld
+
+- name: Show password to Web interface "http://<ip_address>"
+  command: bash -c "cat /var/lib/jenkins/secrets/initialAdminPassword" 
+  register: check_pass
+
+- debug:
+    var: check_pass.stdout

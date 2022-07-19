@@ -1,0 +1,7 @@
+---
+- name: Deploy Jenkins service
+  hosts: all
+  become: true
+
+  roles:
+    - jenkins_roles
