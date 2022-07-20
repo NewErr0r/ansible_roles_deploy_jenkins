@@ -1,3 +1,6 @@
 ---
 rpm_key: "https://pkg.jenkins.io/redhat-stable/jenkins.io.key"
 repo: "https://pkg.jenkins.io/redhat-stable/jenkins.repo"
+
+deb_repo: "deb https://pkg.jenkins.io/debian-stable binary"
+deb_key:  "https://pkg.jenkins.io/debian-stable/jenkins.io.key"

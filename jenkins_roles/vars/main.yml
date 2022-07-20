@@ -1,2 +1,10 @@
 ---
 path_repo: /etc/yum.repos.d/jenkins.repo
+
+packages:
+  - default-jre 
+  - gnupg2 
+  - apt-transport-https 
+  - wget 
+  - default-jre 
+  - default-jdk

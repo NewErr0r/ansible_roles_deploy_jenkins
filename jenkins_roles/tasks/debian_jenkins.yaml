@@ -1,0 +1,41 @@
+---
+- name: Update apt packages
+  apt:
+    name: "*"
+    state: latest
+    update_cache: yes
+    force_apt_get: yes
+
+- name: Install packages for Java
+  apt: 
+    name: "{{ packages }}"
+    state: latest 
+    update_cache: yes
+
+- name: Add repo for Jenkins
+  shell: echo "deb https://pkg.jenkins.io/debian-stable binary/" | tee /etc/apt/sources.list.d/jenkins.list
+
+- name: Add key from Jenkins
+  apt_key:
+    url: "{{ deb_key }}"
+
+- name: Update apt packages
+  apt:
+    name: "*"
+    state: latest
+    update_cache: yes
+    force_apt_get: yes
+
+- name: Install Jenkins
+  apt: 
+    name: jenkins 
+    state: latest
+  notify: 
+    - Started and Enabled Jenkins
+
+- name: Show password to Web interface "http://<ip_address>"
+  command: bash -c "cat /var/lib/jenkins/secrets/initialAdminPassword" 
+  register: check_pass
+
+- debug:
+    var: check_pass.stdout
