@@ -1,0 +1,5 @@
+1. Для запуска установки Jenkink на CentOS раскомментировать строчку в файле "deploy_jenkins.yaml":
+#    - { role: jenkins_roles, when: ansible_os_family == 'RedHat'}
+
+1. Для запуска установки Jenkink на Debian/Ubuntu раскомментировать строчку в файле "deploy_jenkins.yaml":
+#    - { role: jenkins_roles, when: ansible_os_family == 'Debian'}
